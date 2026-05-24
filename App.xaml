@@ -1,0 +1,100 @@
+﻿<Application x:Class="Lumina.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Lumina" 
+             xmlns:controls="clr-namespace:Lumina.Controls"
+             xmlns:media="clr-namespace:Lumina.Controls"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:sf="clr-namespace:WpfSnowfall"
+             StartupUri="Windows/StartupProgressBar.xaml">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Windows/Assets/ControlTemplates.xaml"/>
+                <ResourceDictionary Source="Windows/Assets/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Original color palette -->
+            <FontFamily x:Key="Kantumruy">pack://application:,,,/Windows/Assets/KantumruyPro-Regular.ttf</FontFamily>
+            <FontFamily x:Key="TitleFont">Calibri</FontFamily>
+            <FontFamily x:Key="SmallTitleFont">Bahnschrift Light</FontFamily>
+            <FontFamily x:Key="BigTextFont">Microsoft JhengHei UI Light</FontFamily>
+
+            <!--Color palette-->
+            <Color x:Key="Accent">#EFACBE</Color>
+            <SolidColorBrush x:Key="TitleColor" Color="Black"/>
+            <SolidColorBrush x:Key="AccentColor" Color="Black"/>
+            <SolidColorBrush x:Key="FancyColor" Color="White"/>
+            <SolidColorBrush x:Key="InactiveColor" Color="gray"/>
+            <SolidColorBrush x:Key="BackColor" Color="White"/>
+            <SolidColorBrush x:Key="LightBackColor" Color="White"/>
+            <SolidColorBrush x:Key="DividorColor" Color="White"/>
+
+            <SolidColorBrush x:Key="Upload" Color="#DEBACE"/>
+            <SolidColorBrush x:Key="Download" Color="#d1f28e"/>
+
+            <!-- Math Converter -->
+            <local:MathConverter x:Key="Math" />
+
+            <!-- Geometry Icons -->
+            <Geometry x:Key="CloseIcon">M18.3 5.71a.996.996 0 00-1.41 0L12 10.59 7.11 5.7A.996.996 0 005.7 7.11L10.59 12 5.7 16.89a.996.996 0 101.41 1.41L12 13.41l4.89 4.89a.996.996 0 101.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z</Geometry>
+            <Geometry x:Key="HideIcon">M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z</Geometry>
+            <Geometry x:Key="Overlay">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z</Geometry>
+            <Geometry x:Key="LogIcon">M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z</Geometry>
+            <Geometry x:Key="SettingsIcon">M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5a3.5,3.5 0 0,1 3.5,3.5A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z</Geometry>
+            <Geometry x:Key="AhkIcon">M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M7.07,18.28C7.5,17.38 10.12,16.09 12,17.05C13.88,16.09 16.5,17.38 16.93,18.28C15.57,19.36 13.86,20 12,20C10.14,20 8.43,19.36 7.07,18.28M18.36,16.83C16.93,15.09 13.46,15.14 12,16.14C10.54,15.14 7.07,15.09 5.64,16.83C4.62,15.5 4,13.82 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,13.82 19.38,15.5 18.36,16.83Z</Geometry>
+            <Geometry x:Key="ArcIcon">M223.476,108.41c-1.779-2.96-44.35-72.503-111.202-72.503S2.851,105.45,1.072,108.41c-1.43,2.378-1.43,5.351,0,7.729c1.779,2.96,44.35,72.503,111.202,72.503s109.423-69.543,111.202-72.503C224.906,113.761,224.906,110.788,223.476,108.41z M112.274,173.642c-49.925,0-86.176-47.359-95.808-61.374c9.614-14.032,45.761-61.36,95.808-61.36s86.176,47.359,95.808,61.374C198.468,126.313,162.321,173.642,112.274,173.642z M112.274,61.731c-27.869,0-50.542,22.674-50.542,50.543c0,27.868,22.673,50.54,50.542,50.54s50.541-22.672,50.541-50.54C162.815,84.405,140.143,61.731,112.274,61.731z M112.274,147.814c-19.598,0-35.542-15.943-35.542-35.54c0-19.599,15.944-35.543,35.542-35.543s35.541,15.944,35.541,35.543C147.815,131.871,131.872,147.814,112.274,147.814z M112.274,92.91c-10.702,0-19.372,8.669-19.372,19.364c0,10.694,8.67,19.363,19.372,19.363s19.373-8.669,19.373-19.363C131.647,101.579,122.977,92.91,112.274,92.91z</Geometry>
+            <Geometry x:Key="QuestionMark">M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M21,9V7L15,1H5C3.89,1 3,1.89 3,3V21A2,2 0 0,0 5,23H19A2,2 0 0,0 21,21V9M19,21H5V3H12V9H19V21Z</Geometry>
+            <Geometry x:Key="Speaker">M13.0355 8.5211C13.4261 8.1306 14.0674 8.1267 14.3881 8.5764 15.0882 9.5579 15.5 10.7592 15.5 12.0567 15.5 13.3541 15.0882 14.5554 14.3881 15.537 14.0674 15.9866 13.4261 15.9827 13.0355 15.5922 12.645 15.2017 12.6586 14.5725 12.9408 14.0978 13.296 13.5002 13.5 12.8023 13.5 12.0567 13.5 11.3111 13.296 10.6131 12.9408 10.0156 12.6586 9.5408 12.645 8.9116 13.0355 8.5211M15.864 5.6932C16.2545 5.3026 16.8921 5.2998 17.2419 5.7271 18.6532 7.4512 19.5 9.6553 19.5 12.0571 19.5 14.459 18.6532 16.6631 17.2419 18.3871 16.8921 18.8145 16.2545 18.8116 15.864 18.4211 15.4734 18.0306 15.4792 17.4007 15.8183 16.9648 16.8723 15.6098 17.5 13.9068 17.5 12.0571 17.5 10.2075 16.8723 8.5045 15.8183 7.1494 15.4792 6.7135 15.4734 6.0837 15.864 5.6932M11 16.5858V7.4142C11 6.5233 9.9229 6.0771 9.2929 6.7071L7.2929 8.7071C7.1054 8.8946 6.851 9 6.5858 9H5C4.4477 9 4 9.4477 4 10V14C4 14.5523 4.4477 15 5 15H6.5858C6.851 15 7.1054 15.1054 7.2929 15.2929L9.2929 17.2929C9.9229 17.9229 11 17.4767 11 16.5858Z</Geometry>
+            <Geometry x:Key="Pin">M 12.956 18.956 L 9 15 l -3.956 -3.956 a 1 1 0 0 1 0.314 -1.626 l 5.261 -2.255 a 1 1 0 0 0 0.535 -0.548 l 1.283 -3.207 a 1 1 0 0 1 1.635 -0.336 l 6.856 6.856 a 1 1 0 0 1 -0.336 1.635 l -3.207 1.283 a 1 1 0 0 0 -0.548 0.535 l -2.255 5.261 a 1 1 0 0 1 -1.626 0.314 M 8 14 L 5 18 Q 3 21 6 19 L 10 16</Geometry>
+
+            <!-- Slider Style -->
+            <Style x:Key="Slider" TargetType="Slider">
+                <Setter Property="Background" Value="{StaticResource InactiveColor}"/>
+                <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Slider">
+                            <Grid>
+                                <Border Background="{TemplateBinding Background}" 
+                                        CornerRadius="2" Height="4" VerticalAlignment="Center"/>
+                                <Track Name="PART_Track">
+                                    <Track.Thumb>
+                                        <Thumb Width="16" Height="16">
+                                            <Thumb.Template>
+                                                <ControlTemplate>
+                                                    <Ellipse Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"/>
+                                                </ControlTemplate>
+                                            </Thumb.Template>
+                                        </Thumb>
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="TransparentWindow" TargetType="Window">
+                <EventSetter Event="Loaded" Handler="TransparentWindowLoaded"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="AllowsTransparency" Value="True"/>
+                <Setter Property="ResizeMode" Value="NoResize"/>
+                <Setter Property="WindowStyle" Value="None"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Window">
+                            <Grid x:Name="mainddd" MouseDown="BorderMouseDown">
+                                <Border x:Name="backg" BorderThickness="1" BorderBrush="{StaticResource DividorColor}" Background="{StaticResource BackColor}" CornerRadius="12"/>
+                                <ContentPresenter/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
