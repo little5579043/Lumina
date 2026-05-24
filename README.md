@@ -9,3 +9,4 @@ Api tracker for Destiny 2
 
 
 3rd Party Software is never permitted
+<img width="353" height="524" alt="image" src="https://github.com/user-attachments/assets/f4ea47ff-5ea9-416f-9349-0041402d9e25" />
